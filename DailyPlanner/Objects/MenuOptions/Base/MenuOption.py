@@ -1,13 +1,9 @@
 from Objects.Base.ActivatedObj import ActivatedObj
 from Objects.Base.Selected import Selected
 
-class Task(ActivatedObj):
+class MenuOption(ActivatedObj):
     def __init__(self):
-        self.content = ''
-        self.__selected = Selected.FALSE
-
-    def __init__(self, content : str):
-        self.content = content
+        self.content = 'Пункт меню'
         self.__selected = Selected.FALSE
 
     @property
@@ -17,13 +13,6 @@ class Task(ActivatedObj):
     @property
     def selected(self):
         return self.__selected
-
-    @content.setter
-    def content(self, content):
-        if type(content) is str:
-            self.__content = content
-        else:
-            self.__content = ''
 
     @selected.setter
     def selected(self, selected):
@@ -41,7 +30,6 @@ class Task(ActivatedObj):
         return self.selected
 
     def emit(self):
-        self.__selected = Selected.CHOSEN
         return self
 
     def __str__(self):
