@@ -1,7 +1,7 @@
 from Objects.Base.Selected import Selected
 from Objects.MenuOptions.Base.MenuOption import MenuOption
 
-class MarkCompleted(MenuOption):
+class ExportTask(MenuOption):
     def __init__(self):
-        self.content = 'Отметить выполненным'
+        self.content = 'Экспортировать задачи'
         self.__selected = Selected.FALSE

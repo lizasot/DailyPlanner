@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CommandHandler\Controller.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="DailyPlanner.py" />
     <Compile Include="Objects\Base\ActivatedObj.py">
       <SubType>Code</SubType>
@@ -32,14 +35,31 @@
     <Compile Include="Objects\MenuOptions\Base\MenuOption.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Objects\MenuOptions\DeleteTask.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\MenuOptions\EditTask.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\MenuOptions\ExportTask.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Objects\MenuOptions\ImportTask.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Objects\MenuOptions\MarkCompleted.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Objects\Task.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="UserInterface\ConsoleInterface.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CommandHandler\" />
+    <Folder Include="UserInterface\" />
     <Folder Include="Objects\" />
     <Folder Include="Objects\Base\" />
     <Folder Include="Objects\MenuOptions\" />
