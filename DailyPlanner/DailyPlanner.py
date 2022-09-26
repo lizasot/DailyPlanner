@@ -1,9 +1,5 @@
-from Objects.Task import Task
+from CommandHandler.Controller import Controller
+from Interface.ConsoleInterface import ConsoleInterface
 
-tasks : list = []
-
-tasks.append(Task('Задача 1'))
-tasks.append(Task('Задача 2'))
-tasks.append(Task('Задача 3'))
-
-print(list(map(str,tasks)))
+controller = Controller(ConsoleInterface())
+controller.start()

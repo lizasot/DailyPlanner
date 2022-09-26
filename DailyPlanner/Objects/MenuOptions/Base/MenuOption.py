@@ -1,5 +1,5 @@
-from Objects.Base.ActivatedObj import ActivatedObj
-from Objects.Base.Selected import Selected
+from ...Base.ActivatedObj import ActivatedObj
+from ...Base.Selected import Selected
 
 class MenuOption(ActivatedObj):
     def __init__(self):

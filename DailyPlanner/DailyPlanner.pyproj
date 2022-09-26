@@ -32,6 +32,9 @@
     <Compile Include="Objects\MenuOptions\AddNewTask.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Objects\MenuOptions\Agree.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Objects\MenuOptions\Base\MenuOption.py">
       <SubType>Code</SubType>
     </Compile>
@@ -50,20 +53,27 @@
     <Compile Include="Objects\MenuOptions\MarkCompleted.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Objects\MenuOptions\Refuse.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Objects\Task.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="UserInterface\ConsoleInterface.py">
+    <Compile Include="Interface\Base\UserInterface.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interface\ConsoleInterface.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CommandHandler\" />
-    <Folder Include="UserInterface\" />
+    <Folder Include="Interface\" />
     <Folder Include="Objects\" />
     <Folder Include="Objects\Base\" />
     <Folder Include="Objects\MenuOptions\" />
     <Folder Include="Objects\MenuOptions\Base\" />
+    <Folder Include="Interface\Base\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
