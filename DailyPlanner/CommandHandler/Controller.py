@@ -1,4 +1,5 @@
 import datetime
+import json
 import sys
 sys.path.append("..")
 
@@ -73,11 +74,15 @@ class Controller():
             choice_ind += 1
         return choice_ind
     
-    def importTasks(self, file_import = 'import.txt'):
-        self.out.print('Загружаются задачи...')
+    def importTasks(self, file_import = 'import.json'):
+        if os.path.exists(file_import):
+            with open(file_import, 'r') as f:
+                json_object = json.load(f)
+            self.task_list = [Task(x) for x in json_object]
     
-    def exportTasks(self, file_import = 'export.txt'):
-        self.out.print('Сохраняются задачи...')
+    def exportTasks(self, file_export = 'export.json'):
+        with open(file_export, 'w') as f:
+            json.dump([x.content for x in self.task_list], f)
 
     def displayTaskList(self):
         if len(self.task_list) > 0:
@@ -102,8 +107,8 @@ class Controller():
     def deleteTask(self, task):
         self.task_list.remove(task)
 
-    def completeTask(self, task):
-        with open('log.txt', 'a') as f:
+    def completeTask(self, task, file_log):
+        with open(file_log, 'a') as f:
             date_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             f.write(f'{date_time} {task.content}\n')
         self.deleteTask(task)
@@ -127,8 +132,8 @@ class Controller():
             option = self.getOption(self.task_list, text_for_repeat)
         return option
 
-    def start(self, file_import = 'import.txt'):
-        file_export = 'export.txt'
+    def start(self, file_import = 'save.json'):
+        file_export = 'save.json'
         file_log = 'log.txt'
         accord : list = [Agree(), Refuse()]
         # если найден файл для импорта - предложить импортировать
@@ -147,7 +152,7 @@ class Controller():
                 task = self.selectTask(option)
                 option.selected = Selected.FALSE
                 if task != None:
-                    self.completeTask(task)
+                    self.completeTask(task, file_log)
             elif type(option) == AddNewTask:
                 self.out.clear()
                 option.selected = Selected.CHOSEN
@@ -170,5 +175,7 @@ class Controller():
                     self.deleteTask(task)
             elif type(option) == ImportTask:
                 self.importTasks(file_import)
+                option.selected = Selected.FALSE
             elif type(option) == ExportTask:
                 self.exportTasks(file_export)
+                option.selected = Selected.FALSE
