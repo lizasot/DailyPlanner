@@ -3,5 +3,5 @@ from Objects.MenuOptions.Base.MenuOption import MenuOption
 
 class Agree(MenuOption):
     def __init__(self):
-        self.content = 'Согласиться'
-        self.__selected = Selected.FALSE
+        self._content = 'Согласиться'
+        self._selected = Selected.FALSE

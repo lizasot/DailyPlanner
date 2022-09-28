@@ -3,34 +3,33 @@ from ...Base.Selected import Selected
 
 class MenuOption(ActivatedObj):
     def __init__(self):
-        self.content = 'Пункт меню'
-        self.__selected = Selected.FALSE
-
+        self._content = 'Пункт меню'
+        self._selected = Selected.FALSE
+        
     @property
     def content(self):
-        return self.__content
+        return self._content
+
+    @content.setter
+    def content(self, content):
+        if content is str:
+            self._content = content
 
     @property
     def selected(self):
-        return self.__selected
+        return self._selected
 
     @selected.setter
     def selected(self, selected):
         if selected == Selected.CHOSEN or selected == 2:
-            self.__selected = Selected.FALSE
+            self._selected = Selected.FALSE
         elif selected == True or selected == Selected.TRUE or selected == 1:
-            self.__selected = Selected.TRUE
+            self._selected = Selected.TRUE
         else:
-            self.__selected = Selected.FALSE
-
-    def getContent(self):
-        return self.content
-
-    def getSelected(self):
-        return self.selected
+            self._selected = Selected.FALSE
 
     def emit(self):
-        return self
+        return type(self)
 
     def __str__(self):
         if self.selected == Selected.TRUE:

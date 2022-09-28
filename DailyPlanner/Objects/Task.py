@@ -3,45 +3,38 @@ from .Base.Selected import Selected
 
 class Task(ActivatedObj):
     def __init__(self):
-        self.content = ''
-        self.__selected = Selected.FALSE
+        self._content = ''
+        self._selected = Selected.FALSE
 
     def __init__(self, content : str):
-        self.content = content
-        self.__selected = Selected.FALSE
+        self._content = content
+        self._selected = Selected.FALSE
 
     @property
     def content(self):
-        return self.__content
-
-    @property
-    def selected(self):
-        return self.__selected
+        return self._content
 
     @content.setter
     def content(self, content):
         if type(content) is str:
-            self.__content = content
+            self._content = content
         else:
-            self.__content = ''
+            self._content = ''
+
+    @property
+    def selected(self):
+        return self._selected
 
     @selected.setter
     def selected(self, selected):
         if selected == Selected.CHOSEN or selected == 2:
-            self.__selected = Selected.FALSE
+            self._selected = Selected.FALSE
         elif selected == True or selected == Selected.TRUE or selected == 1:
-            self.__selected = Selected.TRUE
+            self._selected = Selected.TRUE
         else:
-            self.__selected = Selected.FALSE
-
-    def getContent(self):
-        return self.content
-
-    def getSelected(self):
-        return self.selected
+            self._selected = Selected.FALSE
 
     def emit(self):
-        self.__selected = Selected.CHOSEN
         return self
 
     def __str__(self):

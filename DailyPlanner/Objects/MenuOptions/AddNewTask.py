@@ -3,5 +3,5 @@ from Objects.MenuOptions.Base.MenuOption import MenuOption
 
 class AddNewTask(MenuOption):
     def __init__(self):
-        self.content = 'Добавить новую задачу'
-        self.__selected = Selected.FALSE
+        self._content = 'Добавить новую задачу'
+        self._selected = Selected.FALSE

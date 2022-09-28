@@ -3,5 +3,5 @@ from Objects.MenuOptions.Base.MenuOption import MenuOption
 
 class ImportTask(MenuOption):
     def __init__(self):
-        self.content = 'Импортировать задачи'
-        self.__selected = Selected.FALSE
+        self._content = 'Импортировать задачи'
+        self._selected = Selected.FALSE
