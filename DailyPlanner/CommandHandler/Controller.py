@@ -1,3 +1,4 @@
+import datetime
 import sys
 sys.path.append("..")
 
@@ -102,6 +103,9 @@ class Controller():
         self.task_list.remove(task)
 
     def completeTask(self, task):
+        with open('log.txt', 'a') as f:
+            date_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            f.write(f'{date_time} {task.content}\n')
         self.deleteTask(task)
 
     def editTask(self, task):
@@ -124,13 +128,15 @@ class Controller():
         return option
 
     def start(self, file_import = 'import.txt'):
+        file_export = 'export.txt'
+        file_log = 'log.txt'
         accord : list = [Agree(), Refuse()]
         # если найден файл для импорта - предложить импортировать
-        #if os.path.exists(file_import):
-        if False:
+        if os.path.exists(file_import):
+        #if False:
             text_for_repeat = lambda: self.out.print(f'Импортировать задачи из файла {file_import}?')
             if type(self.getOption(accord, text_for_repeat)) == Agree:
-                self.importTasks()
+                self.importTasks(file_import)
 
         end = False
         while not end:
@@ -163,6 +169,6 @@ class Controller():
                 if task != None:
                     self.deleteTask(task)
             elif type(option) == ImportTask:
-                self.importTasks()
+                self.importTasks(file_import)
             elif type(option) == ExportTask:
-                self.exportTasks()
+                self.exportTasks(file_export)
