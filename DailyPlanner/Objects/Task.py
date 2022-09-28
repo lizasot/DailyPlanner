@@ -1,5 +1,5 @@
-from Base.ActivatedObj import ActivatedObj
-from .Base.Selected import Selected
+from Objects.Base.ActivatedObj import ActivatedObj
+from Objects.Base.Selected import Selected
 
 class Task(ActivatedObj):
     def __init__(self):
@@ -28,7 +28,7 @@ class Task(ActivatedObj):
     @selected.setter
     def selected(self, selected):
         if selected == Selected.CHOSEN or selected == 2:
-            self._selected = Selected.FALSE
+            self._selected = Selected.CHOSEN
         elif selected == True or selected == Selected.TRUE or selected == 1:
             self._selected = Selected.TRUE
         else:

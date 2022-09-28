@@ -7,6 +7,9 @@ from Interface.Base.UserInterface import UserInterface
 from Interface.ConsoleInterface import ConsoleInterface
 from Objects.MenuOptions.Base.MenuOption import MenuOption
 from Objects.Base.Selected import Selected
+
+from Objects.Task import Task
+
 from Objects.MenuOptions.Agree import Agree
 from Objects.MenuOptions.Refuse import Refuse
 
@@ -98,11 +101,15 @@ class Controller():
     def deleteTask(self, task):
         self.task_list.remove(task)
 
-    def comleteTask(self, task):
+    def completeTask(self, task):
         self.deleteTask(task)
 
     def editTask(self, task):
-        task.content = self.out.read('Введите новый текст задачи: ')
+        task.selected = Selected.CHOSEN
+        self.out.print(str(task))
+        self.out.print('Введите новый текст выбранной задачи: ')
+        task.content = self.out.read()
+        task.selected = Selected.FALSE
 
     def selectTask(self, option):
         if len(self.task_list) == 0:
@@ -112,7 +119,6 @@ class Controller():
             self.out.getChoice()
             option = None
         else:
-            option.selected = Selected.CHOSEN
             text_for_repeat = lambda: self.out.print(str(option))
             option = self.getOption(self.task_list, text_for_repeat)
         return option
@@ -131,21 +137,31 @@ class Controller():
             text_for_repeat = lambda: self.displayTaskList()
             option = self.getOption(self.menu_options, text_for_repeat)
             if type(option) == MarkCompleted:
-                option = self.selectTask(option)
-                if option != None:
-                    self.completeTask(option)
+                option.selected = Selected.CHOSEN
+                task = self.selectTask(option)
+                option.selected = Selected.FALSE
+                if task != None:
+                    self.completeTask(task)
             elif type(option) == AddNewTask:
+                self.out.clear()
                 option.selected = Selected.CHOSEN
                 self.out.print(str(option))
-                self.task_list.append(self.out.read('Введите задачу: '))
+                self.out.print('Введите задачу: ')
+                new_task = self.out.read()
+                self.task_list.append(Task(new_task))
+                option.selected = Selected.FALSE
             elif type(option) == EditTask:
-                option = self.selectTask(option)
-                if option != None:
-                    self.editTask(option)
+                option.selected = Selected.CHOSEN
+                task = self.selectTask(option)
+                option.selected = Selected.FALSE
+                if task != None:
+                    self.editTask(task)
             elif type(option) == DeleteTask:
-                option = self.selectTask(option)
-                if option != None:
-                    self.deleteTask(option)
+                option.selected = Selected.CHOSEN
+                task = self.selectTask(option)
+                option.selected = Selected.FALSE
+                if task != None:
+                    self.deleteTask(task)
             elif type(option) == ImportTask:
                 self.importTasks()
             elif type(option) == ExportTask:

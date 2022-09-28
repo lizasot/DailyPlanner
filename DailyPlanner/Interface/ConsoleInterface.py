@@ -22,14 +22,15 @@ class ConsoleInterface(UserInterface):
         elif key == 'down':
             return 1
         elif key == 'enter':
+            input()
             return 0
 
     def printDivider(self, ch : str = '='):
         print(ch*12)
 
-    def read(self, promt : str = ''):
-        print(promt,end = '')
-        return input()
+    def read(self):
+        text = input()
+        return text
 
     def clear(self):
         print('\n'*100)
