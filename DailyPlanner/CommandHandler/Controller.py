@@ -1,10 +1,7 @@
 import datetime
 import json
-import sys
-sys.path.append("..")
-
 import os
-from random import choice
+
 from Interface.Base.UserInterface import UserInterface
 from Interface.ConsoleInterface import ConsoleInterface
 from Objects.MenuOptions.Base.MenuOption import MenuOption
